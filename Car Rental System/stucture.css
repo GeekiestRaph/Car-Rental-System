@@ -1,0 +1,53 @@
+CarRentalSystem/
+│── src/
+│   ├── main.java
+│   ├── loginSystem.java
+│   ├── Car.java
+│   ├── Customer.java
+│   ├── RentalAgency.java
+│
+│── test/
+│   ├── CarTest.java
+import static org.junit.Assert.*;
+import org.junit.Test;
+
+public class CarTest {
+
+    @Test
+    public void testCarAvailability() {
+        Car car = new Car("KAA123X", "Toyota Corolla");
+        assertTrue(car.isAvailable());
+
+        car.rent();
+        assertFalse(car.isAvailable());
+
+        car.returnCar();
+        assertTrue(car.isAvailable());
+    }
+}
+
+│   ├── RentalAgencyTest.java
+import static org.junit.Assert.*;
+import org.junit.Test;
+
+public class RentalAgencyTest {
+
+    @Test
+    public void testRentAndReturnCar() {
+        RentalAgency agency = new RentalAgency();
+        Car car = new Car("KBB456Y", "Honda Civic");
+        agency.addCar(car);
+
+        // Rent the car
+        agency.rentCar("KBB456Y", "DL12345");
+        assertFalse(car.isAvailable());
+
+        // Return the car
+        agency.returnCar("KBB456Y");
+        assertTrue(car.isAvailable());
+    }
+}
+
+│
+│── README.md
+│── .gitignore
